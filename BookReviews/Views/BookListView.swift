@@ -35,7 +35,7 @@ struct BookListView: View {
                         ForEach(model.books) { b in
                             
                             
-                            NavigationLink(destination: ContentView(), label: {
+                            NavigationLink(destination: BookDetailsView(book: b ), label: {
                                 ZStack {
                                     
                                     Rectangle()
