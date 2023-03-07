@@ -44,24 +44,22 @@ struct BookListView: View {
                                         .frame(width: geo.size.width - 40, height: geo.size.height - 40)
                                         .cornerRadius(20)
                                         .shadow(color: Color (.sRGB, red: 0, green: 0, blue: 0, opacity: 0.7), radius: 10, x: -10, y: 10)
-                                    //                                        GeometryReader { geo in
-                                    //                                    Rectangle()
-                                    //
-                                    //                                        .foregroundColor(.black)
-                                    //
-                                    //
-                                    //                                        .frame(width: geo.size.width - 60, height: geo.size.height - 130)
-                                    //                                        .cornerRadius(20)
-                                    //                                        .shadow(color: Color (.sRGB, red: 0, green: 0, blue: 0, opacity: 0.7),
-                                    //                                                radius: 10, x: -10, y: -10)
-                                    //                                        .padding([.leading, .top])
+                                    
                                     VStack (alignment: .leading){
                                         
-                                        Text(b.title)
-                                        
-                                            .foregroundColor(.black)
-                                            .font(Font.custom("Avenir Heavy", size: 30))
-                                        
+                                        HStack {
+                                            
+                                            Text(b.title)
+                                            
+                                                .foregroundColor(.black)
+                                                .font(Font.custom("Avenir Heavy", size: 30))
+                                                .padding(.trailing)
+                                            
+                                            if b.isFavourite == true {Image(systemName: "star.fill")
+                                                    .padding(.leading)
+                                            }
+                                         
+                                        }
                                         Text (b.author)
                                             .foregroundColor(.black)
                                             .font(Font.custom("Avenir", size: 15))
