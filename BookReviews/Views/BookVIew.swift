@@ -1,5 +1,5 @@
 //
-//  BookVIew.swift
+//  BookView.swift
 //  BookReviews
 //
 //  Created by David May on 2/28/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookVIew: View {
+struct BookView: View {
     @EnvironmentObject var model: BookModel
     
     var body: some View {
@@ -15,8 +15,9 @@ struct BookVIew: View {
     }
 }
 
-struct BookVIew_Previews: PreviewProvider {
+struct BookView_Previews: PreviewProvider {
     static var previews: some View {
-        BookVIew()
+        BookView()
+            .environmentObject(BookModel())
     }
 }

@@ -9,67 +9,88 @@ import SwiftUI
 
 struct BookDetailsView: View {
     
+    @EnvironmentObject var model: BookModel
+
     var book: Book
     //@State var
     @State var selectedRating = 0
     var body: some View {
-        VStack(alignment: .leading) {
-            
-            Text(book.title)
-            .font(Font.custom("Avenir Heavy", size: 40))
-          
+        NavigationView {
+            GeometryReader { geo in 
+                VStack(alignment: .leading) {
+                    
+                    Text(book.title)
+                    .font(Font.custom("Avenir Heavy", size: 35))
+                    .padding(.leading, 10)
+                    .padding(.top, 30)
 
-          
-            
-            Text(book.author)
-              
-                .font(Font.custom("Avenir Heavy", size: 25))
-            
-            Image(book.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 180, height: 350)
-                .padding(.leading, 50)
-            
-            
-            
-            
-            Text("Mark for Later")
-                .font(Font.custom("Avenir Heavy", size: 20))
-                .padding(.leading, 75)
-                
-            
-            
-            
-            
-                if book.isFavourite == true {
-                Image(systemName: "star.fill")
+                  
+                    
+                    Text(book.author)
+                      
+                        .font(Font.custom("Avenir Heavy", size: 25))
+                        .padding(.leading, 10
+                        )
+                    
+                    
+                    NavigationLink(destination: BookContentView(book: book.self), label: {
                         
-                        .padding(.leading, 130)
-            } else {
-                Image(systemName: "star")
-                   
-                    .padding(.leading, 130)
+                        Image(book.image)
+                           
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geo.size.width / 1.5, height: geo.size.height / 2, alignment: .center)
+                            
+                            .padding(.leading, (geo.size.width - (geo.size.width / 1.5)) / 2 )
+             
+                        })
+                  
+                    
+                    
+                    
+                    
+                    Text("Mark for Later")
+                        .font(Font.custom("Avenir Heavy", size: 25))
+                        .padding(.leading, 112)
+                        
+                    
+                    
+                    
+                    
+                        if book.isFavourite == true {
+                        Image(systemName: "star.fill")
+                                
+                                .padding(.leading, 180)
+                    } else {
+                        Image(systemName: "star")
+                           
+                            .padding(.leading, 180)
+                    }
+                    
+                    
+                    
+                    
+                    Text("Rating")
+                        .padding(.top, 15)
+                        .padding(.leading, 167)
+                    Picker("", selection: $selectedRating) {
+                        Text("1").tag(1)
+                        Text("2").tag(2)
+                        Text("3").tag(3)
+                        Text("4").tag(4)
+                        Text("5").tag(5)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .frame(width: 160)
+                    .font(Font.custom("Avenir", size: 15))
+                    .padding(.leading, 110)
+                }
             }
             
             
-            
-            
-            Text("Rating")
-                .padding(.top, 15)
-                .padding(.leading, 120)
-            Picker("", selection: $selectedRating) {
-                Text("1").tag(1)
-                Text("2").tag(2)
-                Text("3").tag(3)
-                Text("4").tag(4)
-                Text("5").tag(5)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .frame(width: 160)
-            .font(Font.custom("Avenir", size: 15))
-            .padding(.leading, 65)
         }
+        
+
     }
 }
 
@@ -81,6 +102,7 @@ struct BookDetailsView_Previews: PreviewProvider {
     let model = BookModel()
 
 
-    BookDetailsView(book: model.books[2])
+    BookDetailsView(book: model.books[1])
+           .environmentObject(BookModel())
   }
 }
